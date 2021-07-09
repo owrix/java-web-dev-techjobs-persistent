@@ -1,4 +1,6 @@
 ## Part 1: Test it with SQL
+columns:id, employer, name, skills
+data types:int, varchar, varchar, varchar
 
 ## Part 2: Test it with SQL
 

@@ -1,12 +1,22 @@
 package org.launchcode.javawebdevtechjobspersistent.models;
 
+import org.hibernate.validator.constraints.Length;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
-
+@MappedSuperclass
 public abstract class AbstractEntity {
 
+    @Id
+    @GeneratedValue
     private int id;
 
+    @NotNull
+    @Length(max = 64) //guess we'll see if we need the min when using length
     private String name;
 
     public int getId() {
