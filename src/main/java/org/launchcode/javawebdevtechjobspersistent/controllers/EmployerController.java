@@ -25,7 +25,6 @@ public class EmployerController {
         return "employers/index";
     }
 
-
     @GetMapping("add")
     public String displayAddEmployerForm(Model model) {
         model.addAttribute(new Employer());
@@ -35,11 +34,10 @@ public class EmployerController {
     @PostMapping("add")
     public String processAddEmployerForm(@ModelAttribute @Valid Employer newEmployer,
                                     Errors errors, Model model) {
-
         if (errors.hasErrors()) {
             return "employers/add";
         } else {
-            employerRepository.save(newEmployer);} //https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/repository/CrudRepository.html
+            employerRepository.save(newEmployer);}
         return "redirect:";
     }
 

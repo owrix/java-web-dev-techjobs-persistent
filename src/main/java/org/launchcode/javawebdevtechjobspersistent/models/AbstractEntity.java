@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
@@ -15,7 +16,8 @@ public abstract class AbstractEntity {
     @GeneratedValue
     private int id;
 
-    @NotNull
+    @NotBlank//okay, so this works for the error
+    @NotNull//quite frankly, I dont even know what youre doing, man.
     @Length(max = 64) //guess we'll see if we need the min when using length
     private String name;
 
