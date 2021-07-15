@@ -17,7 +17,7 @@ public abstract class AbstractEntity {
     private int id;
 
     @NotBlank//okay, so this works for the error
-    @NotNull//quite frankly, I dont even know what youre doing, man.
+//    @NotNull//quite frankly, I dont even know what youre doing, man.
     @Length(max = 64) //guess we'll see if we need the min when using length
     private String name;
 

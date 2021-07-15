@@ -35,6 +35,7 @@ public class EmployerController {
     public String processAddEmployerForm(@ModelAttribute @Valid Employer newEmployer,
                                     Errors errors, Model model) {
         if (errors.hasErrors()) {
+            model.addAttribute("title", "Add Employer");
             return "employers/add";
         } else {
             employerRepository.save(newEmployer);}
@@ -44,7 +45,7 @@ public class EmployerController {
     @GetMapping("view/{employerId}")
     public String displayViewEmployer(Model model, @PathVariable int employerId) {
 
-        Optional optEmployer = employerRepository.findById(employerId);
+        Optional<Employer> optEmployer = employerRepository.findById(employerId);
         if (optEmployer.isPresent()) {
             Employer employer = (Employer) optEmployer.get();
             model.addAttribute("employer", employer);

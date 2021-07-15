@@ -1,8 +1,11 @@
 package org.launchcode.javawebdevtechjobspersistent.controllers;
 
 import org.launchcode.javawebdevtechjobspersistent.models.Job;
+import org.launchcode.javawebdevtechjobspersistent.models.data.EmployerRepository;
 import org.launchcode.javawebdevtechjobspersistent.models.data.JobRepository;
+import org.launchcode.javawebdevtechjobspersistent.models.data.SkillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +23,12 @@ import java.util.HashMap;
 public class ListController {
 
     @Autowired
+    private EmployerRepository employerRepository;
+
+    @Autowired
+    private SkillRepository skillRepository;
+
+    @Autowired
     private JobRepository jobRepository;
 
     static HashMap<String, String> columnChoices = new HashMap<>();
@@ -34,6 +43,8 @@ public class ListController {
 
     @RequestMapping("")
     public String list(Model model) {
+        model.addAttribute("employers", employerRepository.findAll());
+        model.addAttribute("skills", skillRepository.findAll());
 
         return "list";
     }
