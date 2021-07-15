@@ -34,7 +34,8 @@ public class HomeController {
     @RequestMapping("")
     public String index(Model model) {
 
-        model.addAttribute("title", "My Jobs");
+        model.addAttribute("title", "My Jobs"); //todo: check redundancy
+        model.addAttribute("jobs", jobRepository.findAll());
 
         return "index";
     }
@@ -56,13 +57,15 @@ public class HomeController {
                                     @RequestParam List<Integer> skills) {
 
         if (errors.hasErrors()) {
-            model.addAttribute("title", "Add Job");
+//            model.addAttribute("title", "Add Job"); //should i be doing anything if it has errors?
             return "add";
         }
-        Optional<Employer> employerResult = employerRepository.findById(employerId);
+        Employer employer = employerRepository.findById(employerId).orElse(new Employer()); // removed optional used orElse with jane
+        newJob.setEmployer(employer); //and changed order of lines
+
         List<Skill> skillObjs = (List<Skill>) skillRepository.findAllById(skills);
         newJob.setSkills(skillObjs);
-        newJob.setEmployer(employerResult.get());
+
         jobRepository.save(newJob);
 
         return "redirect:";
@@ -78,7 +81,7 @@ public class HomeController {
             return "view";
         } else {
 
-            return "redirect:../"; //not "redirect:" most likely
+            return "redirect:/"; //.. between : and // unnecessary?
         }
     }
 

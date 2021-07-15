@@ -5,7 +5,7 @@ data types:int, varchar, varchar, varchar
 select * from job;
 
 ## Part 2: Test it with SQL
-select location
+select name
 from employer
 where location = St. Louis City;
 
@@ -13,8 +13,10 @@ where location = St. Louis City;
 drop table job;
 
 ## Part 4: Test it with SQL
-select skill.name, skill.description
-from job_skills
-join job on job.id = job_skills.jobs_id
-join skill on skill.id = job_skills_id
+select name, description
+from skills
+left join job_skills on skill.id = job_skills.skills_id
+where job_skills.jobs_id is not null
 order by skill.name asc;
+
+//todo: capitalize
